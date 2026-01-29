@@ -16,5 +16,6 @@ test('API getting some lists', async({request}) => {
 
   let allBrandsResponse = await request.get('https://automationexercise.com/api/brandsList')
   let allBrandsResponseBody = await allBrandsResponse.json()
+  console.log(Object.keys(allBrandsResponseBody.brands[0]))
+  console.log(Object.values(allBrandsResponseBody.brands[0]))
 })
-// создать репозиторий на гит хаб (паблик), клонировать его на локал, склонировать его на комп, и запушить код на гит - склонировать == синхронизировать с гитом
