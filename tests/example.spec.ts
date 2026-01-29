@@ -1,5 +1,5 @@
 import {test} from '../fixture'
-import {expect} from '@playwright/test'
+import {expect, request} from '@playwright/test'
 
 test('registration using UI', async ({pageManager}) =>{
   await pageManager.loginPage.open()
@@ -9,5 +9,12 @@ test('registration using UI', async ({pageManager}) =>{
   await pageManager.loginPage.fillAllData('negroe')
 })
 
+test('API getting some lists', async({request}) => {
+  let allProductsResponse = await request.get('https://automationexercise.com/api/productsList')
+  let allProductsResponseBody = await allProductsResponse.json()
+  console.log(allProductsResponseBody)
 
+  let allBrandsResponse = await request.get('https://automationexercise.com/api/brandsList')
+  let allBrandsResponseBody = await allBrandsResponse.json()
+})
 // создать репозиторий на гит хаб (паблик), клонировать его на локал, склонировать его на комп, и запушить код на гит - склонировать == синхронизировать с гитом
