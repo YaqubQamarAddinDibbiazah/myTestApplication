@@ -23,4 +23,5 @@ test('API getting some lists', async({request}) => {
 
 test('perform actions as registered user', async({pageManager, authPage}) =>{
   await expect(authPage.page.getByText('Logout')).toBeVisible()
+  await expect(authPage.page.getByText('Logged in as')).toBeVisible()
 })
