@@ -1,5 +1,6 @@
 import {test} from '../fixture'
 import {expect, request} from '@playwright/test'
+import { PageManager } from '../pages/PageManager'
 
 test('registration using UI', async ({pageManager}) =>{
   await pageManager.loginPage.open()
@@ -18,4 +19,8 @@ test('API getting some lists', async({request}) => {
   let allBrandsResponseBody = await allBrandsResponse.json()
   console.log(Object.keys(allBrandsResponseBody.brands[0]))
   console.log(Object.values(allBrandsResponseBody.brands[0]))
+})
+
+test('perform actions as registered user', async({pageManager, authPage}) =>{
+  await expect(authPage.page.getByText('Logout')).toBeVisible()
 })
