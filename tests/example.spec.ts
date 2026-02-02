@@ -2,6 +2,7 @@ import {test} from '../fixture'
 import {expect, request} from '@playwright/test'
 import { PageManager } from '../pages/PageManager'
 
+
 test('registration using UI', async ({pageManager}) =>{
   await pageManager.loginPage.open()
   await pageManager.loginPage.signupFields.name.fill('ouagadougou')
@@ -21,7 +22,15 @@ test('API getting some lists', async({request}) => {
   console.log(Object.values(allBrandsResponseBody.brands[0]))
 })
 
-test('perform actions as registered user', async({pageManager, authPage}) =>{
-  await expect(authPage.page.getByText('Logout')).toBeVisible()
-  await expect(authPage.page.getByText('Logged in as')).toBeVisible()
+test.use({ storageState: '.auth/user.json' })
+
+test('perform actions as registered user', async({pageManager, authAPI}) =>{
+  await expect(authAPI.page.getByText('Logout')).toBeVisible()
+  await expect(authAPI.page.getByText('Logged in as')).toBeVisible()
+  await pageManager.cartPage.open()
+})
+
+test('new auth using API', async({authAPI}) =>{
+  await authAPI.page.getByText('Logout').click()
+  
 })
