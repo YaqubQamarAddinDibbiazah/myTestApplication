@@ -31,6 +31,7 @@ test('perform actions as registered user', async({pageManager, authAPI}) =>{
 })
 
 test('new auth using API', async({authAPI}) =>{
-  await authAPI.page.getByText('Logout').click()
+  await authAPI.page.goto('/')
+  await expect(authAPI.page.getByText('Logout')).toBeVisible()
   
 })
